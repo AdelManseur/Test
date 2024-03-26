@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Looping over Elements and Classes</title>
+</head>
+<body>
+
+<div id="element1" class="bg-blue c-rgb(255,0,0) b-solid bc-yellow">Element 1</div>
+<div id="element2" class="zi-x x-20px bg-gray">Element 2</div>
+<div id="element3" class="bg-red b-solid">Element 3</div>
+<button id="Adel" class="b-none br-50px bg-rgba(255,0,0,0.2)" type="button">Click Here!</button>
+<input id="input1" class="c-green bg-violet b-none br-20px fs-13px" title="input1" placeholder="Write here...">
+
+<script>
+  var allElements = document.getElementsByTagName("*");
+  
+  for (var i = 0; i < allElements.length; i++) {
+    var element = allElements[i];
+
+    var filterTags = element.tagName.toLocaleLowerCase();
+
+    var ft = filterTags;
+
+    var elementId = element.id;
+
+    if (elementId != "") {
+      
+      console.log(ft, "ID:", elementId);
+      
+      var elementClasses = element.classList;
+      
+      for (var j = 0; j < elementClasses.length; j++) {
+        var className = elementClasses[j];
+        
+        console.log(`Class${j+1}:`, className);
+  
+        if (className.includes("-")) {
+          var parts = className.split("-");
+          
+          switch (parts[0]) {
+            case "bg": element.style.backgroundColor = parts[1]; break;
+            case "c": element.style.color = parts[1]; break;
+            case "zi": element.style.zIndex = parts[1]; break;
+            case "b": element.style.border = parts[1]; break;
+            case "br": element.style.borderRadius = parts[1]; break;
+            case "bc": element.style.borderColor = parts[1]; break;
+            case "fs": element.style.fontSize = parts[1]; break;
+          
+            default: break;
+          }
+        }
+
+        console.log("Relevant Style:");
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
